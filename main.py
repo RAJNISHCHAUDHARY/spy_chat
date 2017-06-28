@@ -92,10 +92,11 @@ def select_a_friend():
 
 #Here we now write a code to send a secret message to your friend
 def send_message():
+
     friend_choice = select_a_friend()
 
     original_image = raw_input("What is the name of the image?")
-    output_path = "output.jpg"
+    output_path = "output.png"
     text = raw_input("What do you want to say? ")
     Steganography.encode(original_image, output_path, text)
 

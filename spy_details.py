@@ -23,6 +23,6 @@ spy = Spy('Rajnish', 'Mr.', 21, 4.7)
 friend_one = Spy('Manish', 'Mr.', 4.5, 22)
 friend_two = Spy('Jony', 'Mr.', 4.39, 23)
 friend_three = Spy('Archit', 'Mr.', 4.95, 21)
-friend_four = spy('sumit','Mr.',4.4,21)
 
-friends = [friend_one, friend_two, friend_three, friend_four]
+
+friends = [friend_one, friend_two, friend_three]
