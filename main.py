@@ -1,7 +1,9 @@
-from spy_details import spy, Spy, ChatMessage, friends
+from spy_details import spy, Spy, ChatMessage, friend_one,friend_two,friend_three
 from steganography.steganography import Steganography
 from datetime import datetime
+#from name_spy import spy
 #list of the status messages
+friends = [friend_one, friend_two, friend_three]
 STATUS_MESSAGES = ['My name is Rajnish, Rajnish Chaudhary', 'Hii i am using spy chat messanger', 'Dont call only spy chat']
 
 print "\t\t\t****Hello! Welcome in the secret chat messanger****"
@@ -132,6 +134,33 @@ def read_chat_history():
         else:
             print '[%s] %s said: %s' % (chat.time.strftime("%d %B %Y"), friends[read_for].name, chat.message)
 
+def delete(friends):
+            if len(friends) == 0:
+                print "You have no friend currently"
+            counter = 1
+            for temp in friends:
+                print"\n\t%d\t%s" % (counter, temp)
+                counter = counter + 1
+            select_friend = raw_input("\nSelect a friend :\t")
+            select_friend = int(select_friend)
+            i = len(friends)
+            if i == 0:
+                print "You have No friend to Delete\n"
+            else:
+                temp1 = select_friend
+                temp = 0
+                lis = []
+                while temp1 < len(friends):
+                    friends[temp1 - 1] = friends[temp1]
+                    temp1 = temp1 + 1
+                temp1 = 1
+                while temp < len(friends) - 1:
+                    lis.append(friends[temp])
+                    print "\n\t%d\t%s" % (temp1, friends[temp])
+                    temp = temp + 1
+                    temp1 = temp1 + 1
+                    friends = lis
+            return friends
 #Now be are able to do chat with spy
 def start_chat(spy):
     spy.name = spy.salutation + " " + spy.name
@@ -144,7 +173,7 @@ def start_chat(spy):
         show_menu = True
 
         while show_menu:
-            menu_choices = "***What do you want to do? \n 1. Add a status update \n 2. Add a friend \n 3. Send a secret message \n 4. Read a secret message \n 5. Read Chats from a user \n 6. Close Application \n"
+            menu_choices = "***What do you want to do? \n 1. Add a status update \n 2. Add a friend \n 3. Send a secret message \n 4. Read a secret message \n 5. Read Chats from a user \n 6. Delete friend \n 7.Close applications"
             menu_choice = raw_input(menu_choices)
 
             if len(menu_choice) > 0:
@@ -161,6 +190,8 @@ def start_chat(spy):
                     read_message()
                 elif menu_choice == 5:
                     read_chat_history()
+                elif menu_choice ==6:
+                    delete()
                 else:
                     show_menu = False
     else:

@@ -25,4 +25,3 @@ friend_two = Spy('Jony', 'Mr.', 4.39, 23)
 friend_three = Spy('Archit', 'Mr.', 4.95, 21)
 
 
-friends = [friend_one, friend_two, friend_three]
