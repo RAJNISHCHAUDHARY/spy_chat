@@ -1,4 +1,6 @@
-import sys
+#--------------------------------------------------Starting of project---------------------------------------------------------------------------
+
+import sys      #Here we use import function to import other files information in  this page
 from termcolor import colored,cprint
 import colorama
 colorama.init()
@@ -7,9 +9,7 @@ from steganography.steganography import Steganography
 from datetime import datetime
 print colored('|\t\t\t*******hello welcome to spy chat messenger*******\t\t\t ', 'red', attrs=['reverse', 'blink'])
 
-#here is we convert the integer into the string
-# spy_age = int(spy_age)
-# print(type(spy_age),"we successfully convert the int into str")
+
 #list of the status messages
 STATUS_MESSAGES = ['My name is Rajnish, Rajnish Chaudhary', 'Hii i am using spy chat messanger', 'Dont call only spy chat']
 
@@ -38,13 +38,13 @@ def new_user():
     spy_rating = 0.0
     spy_is_online = False
 
-    spy_age = raw_input("\t\tPlease provide  your age ")
-    print("\t\tHello " +spy_name+ " \t\t\nAge : "+ spy_age +".\n \t\t....Welcome to massenger....")
-    spy_rating =  raw_input("\t\tPlease provide your rattings : ")
+    spy_age = raw_input ("\t\tPlease provide  your age ")
+    print colored("\t\tHello " +spy_name+ " \t\tAge : "+ spy_age +".\n \t\t....Welcome to massenger....,", 'blue', attrs=['reverse', 'blink'])
+    spy_rating =  raw_input ("\t\tPlease provide your rattings :")
     spy_rating = float(spy_rating)
     if spy_age > 12 and spy_age <50:
 
-        #welcome message based on their rattings,
+#welcome message based on their rattings,
           if spy_rating > 4.5:
             print("You are good one spy. ")
           elif spy_rating > 3.5 and spy_rating <=4.5:
@@ -54,22 +54,21 @@ def new_user():
           else:
             print("We can always use someone in office to help...")
 
-          #make spy is online
+#make spy is online
           spy_is_online = True
-          print("\t\t\tAuthentications complete. \n\t\t\tWelcome :" + spy_name + " \n\t\t\tAge :  " + str(spy_age) +  " \n\t\t\tand ratting : " + str(spy_rating)) + " \n\t\t\tYou are now online :,'green', attrs=['reverse','blink']"
-          # addstat = raw_input("\t\t\t*****Do you wanna add status Y and N*****\t")
-          # if str.upper(addstat) == "Y":
-          #     print add_status()
-          #
-    #else:
-    #     add_status_new()
+
+    else:
+        print ("\t\t\tAuthentications complete. \n\t\t\tWelcome :" + spy_name + " \n\t\t\tAge :  " + str(
+            spy_age) + " \n\t\t\tand ratting : " + str(
+            spy_rating)) + " \n\t\t\tYou are now online :"
 
 def default_user():
- print ("\t\t\tspy_name : Rajnish")
- print ("\t\t\tspy_salutation: MR")
- print ("\t\t\tspy_age : 21")
- print ("\t\t\tspy_rating : 4.5")
- print ("\t\t\tspy_is_online: True")
+#we use default user
+ print colored("\t\t\tspy_name : Rajnish", 'green', attrs=['reverse', 'blink'])
+ print colored("\t\t\tspy_salutation: MR", 'white', attrs=['reverse', 'blink'])
+ print colored("\t\t\tspy_age : 21", 'red', attrs=['reverse', 'blink'])
+ print colored("\t\t\tspy_rating : 4.5", 'yellow', attrs=['reverse', 'blink'])
+ print colored("\t\t\tspy_is_online: True", 'green', attrs=['reverse', 'blink'])
 
 def add_status():
     updated_status_message = None
@@ -197,10 +196,11 @@ def read_chat_history():
 
     for chat in friends[read_for].chats:
         if chat.sent_by_me:
-            print '[%s] %s: %s' % (chat.time.strftime("%d %B %Y"), 'You said:', chat.message)
+            print('[%s] %s: %s' % (chat.time.strftime("%d %B %Y"), 'You said:', chat.message))
+
          #we print message which sent by user with date time and year
         else:
-            print '[%s] %s said: %s' % (chat.time.strftime("%d %B %Y"), friends[read_for].name, chat.message)
+            print ('[%s] %s said: %s' % (chat.time.strftime("%d %B %Y"), friends[read_for].name, chat.message))
 
 #Now be are able to do chat with spy
 def start_chat(spy):
@@ -214,7 +214,7 @@ def start_chat(spy):
         show_menu = True
 
         while show_menu:
-            menu_choices = "***What do you want to do? \n 1. Add a status update \n 2. Add a friend \n 3. Send a secret message \n 4. Read a secret message \n 5. Read Chats from a user \n 6. Close Application \n"
+            menu_choices = "***What do you want to do? \n 1. Add a status update \n 2. Add a friend \n 3. Send a secret message \n 4. Read a secret message \n 5. Read Chats from a user \n 6. Ask for default user or new user \n"
             menu_choice = raw_input(menu_choices)
 
             if len(menu_choice) > 0:
@@ -231,6 +231,7 @@ def start_chat(spy):
                     read_message()
                 elif menu_choice == 5:
                     read_chat_history()
+
                 else:
                     show_menu = False
     else:
@@ -264,3 +265,4 @@ if str.upper(choice) == "Y":
 
 elif str.upper(choice) == "N":
     default_user()
+#-----------------------------------------------------End of project----------------------------------------------------------------------------
