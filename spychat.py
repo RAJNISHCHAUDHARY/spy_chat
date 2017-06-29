@@ -18,7 +18,7 @@ print colored ("\t\t\t****Hello! Welcome in the secret chat messanger****",'gree
 question = "\t\t\t****Do you want to continue as " + spy.salutation + " " + spy.name + " (Y/N)?**** "
 existing = raw_input(question)
 
-#Here be add our status
+#---------------------------------------------------------Here be add our status-----------------------------------------------------------------
 def new_user():
 
     spy_name = raw_input("\t\t******If you want to enjoy the chat on massenger then***** \n \t\tplease enter your name: ")
@@ -61,9 +61,9 @@ def new_user():
         print ("\t\t\tAuthentications complete. \n\t\t\tWelcome :" + spy_name + " \n\t\t\tAge :  " + str(
             spy_age) + " \n\t\t\tand ratting : " + str(
             spy_rating)) + " \n\t\t\tYou are now online :"
-
+#--------------------------------------------------------we use default user-----------------------------------------------------------------------
 def default_user():
-#we use default user
+
  print colored("\t\t\tspy_name : Rajnish", 'green', attrs=['reverse', 'blink'])
  print colored("\t\t\tspy_salutation: MR", 'white', attrs=['reverse', 'blink'])
  print colored("\t\t\tspy_age : 21", 'red', attrs=['reverse', 'blink'])
@@ -80,7 +80,7 @@ def add_status():
         print 'You don\'t have any status message currently \n'
 
     default = raw_input("\t\t\t****Do you want to select from the older status (y/n)?**** ")
-#For default user only
+#-------------------------------------------------------For default user only--------------------------------------------------------------------
     if default.upper() == "N":
         new_status_message = raw_input("\t\t\t****Please enter your new status**** ")
 
@@ -95,7 +95,7 @@ def add_status():
         for message in STATUS_MESSAGES:
             print '%d. %s' % (item_position, message)
             item_position = item_position + 1
-#For select the status messages from the list
+#-------------------------------------------For select the status messages from the list---------------------------------------------------------
         message_selection = int(raw_input("\nPlease select status from the list "))
 
         if len(STATUS_MESSAGES) >= message_selection:
@@ -111,7 +111,7 @@ def add_status():
 
     return updated_status_message
 
-#This function are create for add a new friend in the friends list
+#--------------------------------This function are create for add a new friend in the friends list-----------------------------------------------
 def add_friend():
     new_friend = Spy('', '', 0, 0.0)
 #Here you give the new friend name
@@ -134,7 +134,7 @@ def add_friend():
 
     return len(friends)
 
-#This block are used to select a friend in the list
+#----------------------------------This block are used to select a friend in the list--------------------------------------------------------------
 def select_a_friend():
     item_number = 0
 
@@ -150,7 +150,7 @@ def select_a_friend():
 
     return friend_choice_position
 
-#Here we now write a code to send a secret message to your friend
+#-------------------------------Here we now write a code to send a secret message to your friend--------------------------------------------------
 def send_message():
     friend_choice = select_a_friend()
                                                              #Here we input the message or genrate a message which send to the other spy
@@ -174,7 +174,8 @@ def send_message():
             print "You have done something Wrong Please Check again and retry"
             i=i-1
 
-#Here you can read the messages
+#-------------------------------------------Here you can read the messages---------------------------------------------------------------------
+
 def read_message():
     sender = select_a_friend()                             #Here we select the friend(spy) to send the message
 
@@ -188,21 +189,23 @@ def read_message():
 
     print "***Your secret message has been saved!***"      #our secret mesage are saved and ready to view by user
 
-#Here we can read the older messages or communication of two friends
+#------------------------------------Here we can read the older messages or communication of two friends-----------------------------------------
 def read_chat_history():
     read_for = select_a_friend()
-
-    print '\n6'
-
+#------------------------------------------now we give color to particular date ,time ,username and message--------------------------------------
+    #print '\n6'
+    now=datetime.now()                 #Here we give datetime.now function
     for chat in friends[read_for].chats:
         if chat.sent_by_me:
-            print('[%s] %s: %s' % (chat.time.strftime("%d %B %Y"), 'You said:', chat.message))
-
-         #we print message which sent by user with date time and year
-        else:
-            print ('[%s] %s said: %s' % (chat.time.strftime("%d %B %Y"), friends[read_for].name, chat.message))
-
-#Now be are able to do chat with spy
+           a =now.strftime("%b %d %Y") #Here we using variable
+           b=now.strftime("%H: %M :%S")
+           text = colored(a,'yellow')
+           text1 =colored(b,'blue')
+           text2 =(text +"at"+text1)
+           d=colored(chat.message,'cyan')
+           c=colored(friends[read_for].name,"green")
+           print ("\n\n\t\t\t"+text2+ "%s said:[%s]") %(c,d)
+#--------------------------------------------------------Now be are able to do chat with spy------------------------------------------------------
 def start_chat(spy):
     spy.name = spy.salutation + " " + spy.name
 
@@ -212,7 +215,7 @@ def start_chat(spy):
               + str(spy.age) + " and rating of: " + str(spy.rating) + " Proud to have you onboard"
 
         show_menu = True
-
+#----------------------------------------------here we use menu list------------------------------------------------------------------------------
         while show_menu:
             menu_choices = "***What do you want to do? \n 1. Add a status update \n 2. Add a friend \n 3. Send a secret message \n 4. Read a secret message \n 5. Read Chats from a user \n 6. Ask for default user or new user \n"
             menu_choice = raw_input(menu_choices)
@@ -235,7 +238,8 @@ def start_chat(spy):
                 else:
                     show_menu = False
     else:
-        print 'Sorry you are not of the correct age to be a spy'
+
+        print 'Sorry you are not of the correct age to be a spy'    #if your choice are not correct
 
 
 if existing == "Y":
