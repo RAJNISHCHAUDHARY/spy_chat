@@ -1,14 +1,19 @@
+import sys
+from termcolor import colored,cprint
+import colorama
+colorama.init()
 from spy_details import spy, Spy, ChatMessage, friends
 from steganography.steganography import Steganography
 from datetime import datetime
-print("|\t\t\t*******hello welcome to spy chat messenger*******\t\t\t ")
+print colored('|\t\t\t*******hello welcome to spy chat messenger*******\t\t\t ', 'red', attrs=['reverse', 'blink'])
+
 #here is we convert the integer into the string
 # spy_age = int(spy_age)
 # print(type(spy_age),"we successfully convert the int into str")
 #list of the status messages
 STATUS_MESSAGES = ['My name is Rajnish, Rajnish Chaudhary', 'Hii i am using spy chat messanger', 'Dont call only spy chat']
 
-print "\t\t\t****Hello! Welcome in the secret chat messanger****"
+print colored ("\t\t\t****Hello! Welcome in the secret chat messanger****",'green', attrs=['reverse','blink'])
 
 question = "\t\t\t****Do you want to continue as " + spy.salutation + " " + spy.name + " (Y/N)?**** "
 existing = raw_input(question)
@@ -26,7 +31,7 @@ def new_user():
 
 
     else:
-     print("\t\t****Invalid sir name*****")
+     print colored("\t\t****Invalid sir name*****",'red', attrs=['reverse','blink'])
      exit(-1)
    #variables initializations for more details of spy
     spy_age = 0
@@ -51,7 +56,7 @@ def new_user():
 
           #make spy is online
           spy_is_online = True
-          print("\t\t\tAuthentications complete. \n\t\t\tWelcome :" + spy_name + " \n\t\t\tAge :  " + str(spy_age) +  " \n\t\t\tand ratting : " + str(spy_rating)) + " \n\t\t\tYou are now online :"
+          print("\t\t\tAuthentications complete. \n\t\t\tWelcome :" + spy_name + " \n\t\t\tAge :  " + str(spy_age) +  " \n\t\t\tand ratting : " + str(spy_rating)) + " \n\t\t\tYou are now online :,'green', attrs=['reverse','blink']"
           # addstat = raw_input("\t\t\t*****Do you wanna add status Y and N*****\t")
           # if str.upper(addstat) == "Y":
           #     print add_status()
@@ -61,7 +66,7 @@ def new_user():
 
 def default_user():
  print ("\t\t\tspy_name : Rajnish")
- print ("\t\t\tspy_salutation: MR ")
+ print ("\t\t\tspy_salutation: MR")
  print ("\t\t\tspy_age : 21")
  print ("\t\t\tspy_rating : 4.5")
  print ("\t\t\tspy_is_online: True")
@@ -149,31 +154,40 @@ def select_a_friend():
 #Here we now write a code to send a secret message to your friend
 def send_message():
     friend_choice = select_a_friend()
-
+                                                             #Here we input the message or genrate a message which send to the other spy
     original_image = raw_input("What is the name of the image?")
     output_path = "output.jpg"
-    text = raw_input("What do you want to say? ")
-    Steganography.encode(original_image, output_path, text)
+    i=3
+    while i>0:
+        text = raw_input("What do you want to say? ")
+        if len(text)<=100 and len(text)>0:                   #Here we maintain the aevrage number of chracter or word spoken by the spy
 
-    new_chat = ChatMessage(text, True)
 
-    friends[friend_choice].chats.append(new_chat)
+            Steganography.encode(original_image, output_path, text)
 
-    print "***Your secret message image is ready!***"
+            new_chat = ChatMessage(text, True)
+
+            friends[friend_choice].chats.append(new_chat)
+                                                              #your secret message is ready to send the spy
+            print "***Your secret message image is ready!***"
+            i=0
+        else:
+            print "You have done something Wrong Please Check again and retry"
+            i=i-1
 
 #Here you can read the messages
 def read_message():
-    sender = select_a_friend()
+    sender = select_a_friend()                             #Here we select the friend(spy) to send the message
 
     output_path = raw_input("***What is the name of the file?***")
 
-    secret_text = Steganography.decode(output_path)
+    secret_text = Steganography.decode(output_path)        #Steganography are used to encode message in a image
 
     new_chat = ChatMessage(secret_text, False)
 
     friends[sender].chats.append(new_chat)
 
-    print "***Your secret message has been saved!***"
+    print "***Your secret message has been saved!***"      #our secret mesage are saved and ready to view by user
 
 #Here we can read the older messages or communication of two friends
 def read_chat_history():
@@ -184,6 +198,7 @@ def read_chat_history():
     for chat in friends[read_for].chats:
         if chat.sent_by_me:
             print '[%s] %s: %s' % (chat.time.strftime("%d %B %Y"), 'You said:', chat.message)
+         #we print message which sent by user with date time and year
         else:
             print '[%s] %s said: %s' % (chat.time.strftime("%d %B %Y"), friends[read_for].name, chat.message)
 
